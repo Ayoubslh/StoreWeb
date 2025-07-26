@@ -1,5 +1,7 @@
 import Hero from "./Sections/Hero";
 import Categories from "./Sections/categories";
+import Products from "./Sections/PhonesProds";
+import Virtue from "./Sections/Virtue";
 
 function Home() {
   return (
@@ -12,6 +14,14 @@ function Home() {
       </p>
 
       <Categories />
+
+      <h2 className="text-5xl font-bold mb-6 text-primary">Featured Products</h2>
+      <p className="text-lg mb-8 text-gray-600">
+        Discover our most popular products
+      </p>
+      <Products />
+      <br className="w-full border-t border-gray-200 my-8" />
+      <Virtue />
     </div>
   );
 }
