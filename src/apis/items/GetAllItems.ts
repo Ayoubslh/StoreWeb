@@ -31,7 +31,7 @@ const fetchAllItems = async (filters: FiltersType) => {
 
 
 
-  const response = await fetch(`http://127.0.0.1:8080/api/v1/items?${params.toString()}`, {
+  const response = await fetch(`https://hptec.onrender.com/api/v1/items?${params.toString()}`, {
     method: "GET",
   });
     console.log("Response status:", response.status);
