@@ -5,7 +5,7 @@ import Virtue from "./Sections/Virtue";
 
 function Home() {
   return (
-    <div className=" flex flex-col items-center justify-center min-h-screen bg-background ">
+    <div className=" flex flex-col items-center  min-h-screen bg-background ">
       <Hero />
       <br className="w-full border-t border-gray-200 my-8" />
       <h2 className="text-5xl font-bold mb-6 text-primary">Shop by Category</h2>

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 function Navbar() {
   const navLink =
-    "relative text-primary font-medium transition duration-300 hover:text-primary-foreground underline-animation";
+    "relative text-primary text-xl font-medium  transition  duration-300 hover:text-primary-foreground underline-animation";
 
   return (
     <nav className="bg-white sticky top-0 w-full p-6 shadow-md flex flex-wrap sm:gap-0 justify-between items-center z-50">
@@ -26,7 +26,7 @@ function Navbar() {
         </Button>
         <Button
           variant="outline"
-          className="text-primary hover:bg-primary-foreground hover:text-white border border-primary"
+          className="text-primary hover:bg-primary hover:text-white border border-primary"
         >
           <a href="/register">Register</a>
         </Button>
