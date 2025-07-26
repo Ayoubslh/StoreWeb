@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import Home from './ui/pages/Home';
+
+import Home from './ui/pages/Home/Home';
+import Navbar from './ui/comps/Navbar';
 
 
 
@@ -7,7 +8,13 @@ import Home from './ui/pages/Home';
 function App() {
 
   return (
-   <Home></Home>
+    <div className='bg-background text-white min-h-screen min-w-screen'>
+      <p className='text-lg font-bold text-white text-center  bg-primary p-4'>
+        Welcome to StoreWeb! Your one-stop shop for all your needs.
+      </p>
+      <Navbar />
+      <Home />
+    </div>
   )
 }
 
