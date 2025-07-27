@@ -13,7 +13,7 @@ import {
 function VCard({name,icon, description}: {name: string, icon: React.ReactNode, description: string}) {
 
     return (
-        <Card className="w-full h-full  max-w-sm bg-white shadow-lg items-center hover:shadow-xl   transition-shadow duration-300 hover:-translate-y-3 ">
+        <Card className="w-full h-full  max-w-sm bg-white shadow-lg items-center hover:shadow-xl   transition duration-300 hover:-translate-y-3 ">
             <CardContent className="flex flex-col items-center justify-center p-6">
                 {icon}
             </CardContent>
