@@ -21,7 +21,7 @@ const [filters, setFilters] = useState({
     if (error) return <div className="text-center text-6xl text-black">Error loading products</div>;
     if (!items || items.length === 0) return <div className="text-center">No products available</div>;
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
             {items.map((item: PhoneDetails) => (
                 <ProductCard key={item._id} item={item} />
             ))}
