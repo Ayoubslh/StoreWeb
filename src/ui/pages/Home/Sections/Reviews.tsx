@@ -5,10 +5,27 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
 import ReviewCard from "@/ui/comps/Comments";
+import { useEffect, useState } from "react";
 
-export const reviews = [
+// Custom hook to detect screen width
+function useIsSmallScreen() {
+  const [isSmall, setIsSmall] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsSmall(window.innerWidth < 768); // Tailwind's `md` breakpoint
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  return isSmall;
+}
+
+const reviews = [
   {
     name: "Samius Mikao",
     avatarUrl: "https://i.pravatar.cc/150?img=7",
@@ -44,12 +61,20 @@ export const reviews = [
 ];
 
 function Reviews() {
-  return (
-    <section className="text-center px-4 py-10 ">   
-     
+  const isSmallScreen = useIsSmallScreen();
+  const orientation = isSmallScreen ? "vertical" : "horizontal";
 
-      <Carousel className="w-full max-w-5xl mx-auto relative overflow-visible">
-        <CarouselPrevious className="absolute -left-10 top-1/2 transform -translate-y-1/2 z-10 text-black bg-white shadow rounded-full p-2 hover:bg-gray-100 transition">
+  return (
+    <section className="text-center px-4 py-10 w-full">
+      <Carousel
+        className="w-full max-w-5xl mx-auto relative overflow-visible px-2"
+        orientation={orientation}
+      >
+        <CarouselPrevious
+          className={`absolute ${
+            isSmallScreen ? "top-2 left-1/2 -translate-x-1/2" : "left-2 top-1/2 -translate-y-1/2"
+          } z-10 text-black bg-white shadow rounded-full p-2 hover:bg-gray-100 transition`}
+        >
           &lt;
         </CarouselPrevious>
 
@@ -59,14 +84,18 @@ function Reviews() {
               key={index}
               className="basis-full sm:basis-1/2 md:basis-1/3 px-2 transition-transform duration-300"
             >
-              <div className="transform scale-90 sm:scale-95 md:scale-100 transition-transform duration-300 hover:scale-105">
+              <div className="transform scale-100 hover:scale-105 transition-transform duration-300">
                 <ReviewCard {...review} />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
 
-        <CarouselNext className="absolute -right-10 top-1/2 transform -translate-y-1/2 z-10 text-black bg-white shadow rounded-full p-2 hover:bg-gray-100 transition">
+        <CarouselNext
+          className={`absolute ${
+            isSmallScreen ? "bottom-2 left-1/2 -translate-x-1/2" : "right-2 top-1/2 -translate-y-1/2"
+          } z-10 text-black bg-white shadow rounded-full p-2 hover:bg-gray-100 transition`}
+        >
           &gt;
         </CarouselNext>
       </Carousel>

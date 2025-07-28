@@ -11,13 +11,13 @@ import FavouritesPage from './ui/pages/Favourites/favourite';
 import Home from './ui/pages/Home/Home';
 
 
-
+const queryClient = new QueryClient();
 
 
 function App() {
 
   return (
-    <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider client={queryClient}>
     <div className='bg-background text-white min-h-screen min-w-screen'>
       <p className='text-lg font-bold text-white text-center  bg-primary p-4'>
         Welcome to StoreWeb! Your one-stop shop for all your needs.
