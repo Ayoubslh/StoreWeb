@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 import Brands from "./Sections/Brands";
 import BlogSection from "./Sections/Blog";
+import Reviews from "./Sections/Reviews";
 
 function Home() {
   return (
@@ -66,17 +67,15 @@ function Home() {
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">From Our Blog</h2>
         <p className="text-lg text-gray-600 mb-8">Latest news and updates from our store</p>
         <BlogSection />
-        {/* Blog posts would be mapped here */}
+      
       </section>
-      {/* Testimonials Section */}
+       <hr className="w-[80%] border-t border-gray-200 my-12" />
+      {/* Reviews Section */}
+     
       <section className="text-center px-4">
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">What Our Customers Say</h2>
         <p className="text-lg text-gray-600 mb-8">Read reviews from our satisfied customers</p>
-        <div className="flex flex-col items-center space-y-4">   
-          <p className="text-lg text-gray-700">"Great products and fast shipping!"</p>
-          <p className="text-lg text-gray-700">"Excellent customer service and quality items."</p>
-          <p className="text-lg text-gray-700">"I love shopping here, always find what I need!"</p>
-        </div>
+         <Reviews />
       </section>
       <hr className="w-[80%] border-t border-gray-200 my-12" />
     

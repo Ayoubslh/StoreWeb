@@ -22,7 +22,7 @@ function VCard({
       </CardContent>
 
       <CardDescription className="flex flex-col items-center justify-center p-4">
-        <CardTitle className="text-2xl font-bold sm:text-lg transition-colors duration-300 group-hover:text-primary">
+        <CardTitle className="text-2xl font-bold sm:text-lg md:text-xl transition-colors duration-300 group-hover:text-primary">
           {name}
         </CardTitle>
       </CardDescription>
