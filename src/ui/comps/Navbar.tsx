@@ -61,7 +61,16 @@ function Navbar() {
           <a href="/" className={navLink}>Shop</a>
           <a href="/products" className={navLink}>All Products</a>
           <a href="/brands" className={navLink}>Brands</a>
+               <div className="flex space-x-2">
+        <Button className="bg-white  border border-primary hover:bg-white">
+          <Link to="/cart"><FaCartShopping  className="text-primary" /></Link>
+        </Button>
+        <Button className="bg-white  border border-primary hover:bg-white">
+          <Link to="/favourites"><FaHeart className="text-primary"  /></Link>
+        </Button>
+        </div>
           <div className="flex space-x-2 pt-2">
+         
             <Button className="bg-primary text-white hover:bg-white hover:text-primary border border-primary">
               <a href="/login">Login</a>
             </Button>
