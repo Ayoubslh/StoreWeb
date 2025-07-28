@@ -4,6 +4,8 @@ import Products from "./Sections/PhonesProds";
 import Virtue from "./Sections/Virtue";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
+import Brands from "./Sections/Brands";
+import BlogSection from "./Sections/Blog";
 
 function Home() {
   return (
@@ -55,7 +57,7 @@ function Home() {
       <section className="text-center px-4">
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">Brands</h2>
         <p className="text-lg text-gray-600 mb-8">Explore products from your favorite brands</p>
-        <Categories />
+        <Brands />
       </section>
 
       <hr className="w-[80%] border-t border-gray-200 my-12" />
@@ -63,6 +65,7 @@ function Home() {
       <section className="text-center px-4">
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">From Our Blog</h2>
         <p className="text-lg text-gray-600 mb-8">Latest news and updates from our store</p>
+        <BlogSection />
         {/* Blog posts would be mapped here */}
       </section>
       {/* Testimonials Section */}

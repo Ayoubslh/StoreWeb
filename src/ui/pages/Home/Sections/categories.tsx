@@ -3,12 +3,27 @@ import { CiHeadphones } from "react-icons/ci";
 import { IoIosLaptop } from "react-icons/io";
 import { BsSmartwatch } from "react-icons/bs";
 import VCard from "@/ui/comps/VerticalCard";
-
 const categories = [
-  { id: '1', name: 'Phones', icon: <IoPhonePortraitOutline color="black" size={60}/> },
-  { id: '2', name: 'Earphones', icon: <CiHeadphones color="black" size={60}/> },
-  { id: '3', name: 'Laptops', icon: <IoIosLaptop color="black" size={60}/> },
-  { id: '4', name: 'Smartwatches', icon: <BsSmartwatch color="black" size={60}/> },
+  {
+    id: '1',
+    name: 'Phones',
+    icon: <IoPhonePortraitOutline className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
+  },
+  {
+    id: '2',
+    name: 'Earphones',
+    icon: <CiHeadphones className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
+  },
+  {
+    id: '3',
+    name: 'Laptops',
+    icon: <IoIosLaptop className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
+  },
+  {
+    id: '4',
+    name: 'Smartwatches',
+    icon: <BsSmartwatch className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
+  },
 ];
 
 function Categories(){

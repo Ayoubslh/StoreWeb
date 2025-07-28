@@ -8,10 +8,10 @@ import VCard from "@/ui/comps/VerticalCard";
 
 
 const Virtues=[
-    {name:"Fast Delivery", icon:<FaShippingFast color="black" size={60}/>, description:"We ensure your products reach you quickly and safely."},
-    {name:"Quality Assurance", icon:<BsFillPatchCheckFill color="black" size={60}/>, description:"We guarantee the quality of our products with strict checks."},
-    {name:"Customer Support", icon:<BiSupport color="black" size={60}/>, description:"Our support team is here to assist you with any queries."},
-    {name:"Secure Payments", icon:<BsShieldFillCheck color="black" size={60} />, description:"We offer secure payment options for your peace of mind."},
+    {name:"Fast Delivery", icon:<FaShippingFast className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60}/>, description:"We ensure your products reach you quickly and safely."},
+    {name:"Quality Assurance", icon:<BsFillPatchCheckFill className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60}/>, description:"We guarantee the quality of our products with strict checks."},
+    {name:"Customer Support", icon:<BiSupport className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60}/>, description:"Our support team is here to assist you with any queries."},
+    {name:"Secure Payments", icon:<BsShieldFillCheck className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />, description:"We offer secure payment options for your peace of mind."},
 ]
 
 
