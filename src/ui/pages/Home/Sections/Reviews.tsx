@@ -4,7 +4,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
 
 import ReviewCard from "@/ui/comps/Comments";
 
@@ -43,25 +43,31 @@ export const reviews = [
   },
 ];
 
-
- function Reviews() {
+function Reviews() {
   return (
-    <section className="text-center px-4">
- 
-      <Carousel className="w-full max-w-3xl mx-auto">
-        <CarouselPrevious className="absolute -left-10   text-black top-1/2 transform -translate-y-1/2 rounded-full p-2 shadow  transition">
-            &lt; Prev
+    <section className="text-center px-4 py-10 ">   
+     
+
+      <Carousel className="w-full max-w-5xl mx-auto relative overflow-visible">
+        <CarouselPrevious className="absolute -left-10 top-1/2 transform -translate-y-1/2 z-10 text-black bg-white shadow rounded-full p-2 hover:bg-gray-100 transition">
+          &lt;
         </CarouselPrevious>
-        <CarouselContent className="space-y-6">
+
+        <CarouselContent className="flex">
           {reviews.map((review, index) => (
-            <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 flex justify-center"
-            > 
-              <ReviewCard {...review} />
+            <CarouselItem
+              key={index}
+              className="basis-full sm:basis-1/2 md:basis-1/3 px-2 transition-transform duration-300"
+            >
+              <div className="transform scale-90 sm:scale-95 md:scale-100 transition-transform duration-300 hover:scale-105">
+                <ReviewCard {...review} />
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselNext className="absolute -right-10 top-1/2 transform -translate-y-1/2 text-black rounded-full p-2 shadow  transition">
-          &gt; Next
+
+        <CarouselNext className="absolute -right-10 top-1/2 transform -translate-y-1/2 z-10 text-black bg-white shadow rounded-full p-2 hover:bg-gray-100 transition">
+          &gt;
         </CarouselNext>
       </Carousel>
     </section>

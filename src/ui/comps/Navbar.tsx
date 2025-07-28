@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react"; // icons
+import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +36,14 @@ function Navbar() {
 
       {/* Auth Buttons (always visible) */}
       <div className="hidden md:flex space-x-2">
+        <div className="flex space-x-2">
+        <Button className="bg-white  border border-primary hover:bg-white">
+          <Link to="/cart"><FaCartShopping  className="text-primary" /></Link>
+        </Button>
+        <Button className="bg-white  border border-primary hover:bg-white">
+          <Link to="/favourites"><FaHeart className="text-primary"  /></Link>
+        </Button>
+        </div>
         <Button className="bg-primary text-white hover:bg-white hover:text-primary border border-primary">
           <a href="/login">Login</a>
         </Button>

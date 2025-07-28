@@ -8,11 +8,13 @@ import {
 } from "@/components/ui/card";
 import type { PhoneDetails } from "@/Types/phone";
 import { FaCartPlus, FaHeartCirclePlus } from "react-icons/fa6";
+import{Link} from "react-router-dom";
 
 function VCard({ item }: { item: PhoneDetails }) {
   return (
+     <Link to={`/details/${item._id}`} className="no-underline">
     <Card className=" sm:w-[200px] md:w-[250px]  bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 hover:-translate-y-2">
-      
+     
       <CardHeader className="flex justify-center">
         <div className="w-full aspect-[4/3]">
           <img
@@ -48,6 +50,7 @@ function VCard({ item }: { item: PhoneDetails }) {
         </div>
       </CardFooter>
     </Card>
+    </Link>
   );
 }
 

@@ -33,7 +33,7 @@ function Home() {
         <p className="text-lg text-gray-600 mb-8">Discover our most popular products</p>
         <Products />
         <Button size="lg" className="mt-6 bg-primary text-white px-6 py-3 rounded-lg hover:bg-white hover:text-primary transition">
-          View All Products <FaArrowRight className="inline ml-2" />
+          See more <FaArrowRight className="inline ml-2" />
         </Button>
       </section>
 
@@ -44,22 +44,26 @@ function Home() {
           <p className="text-lg text-gray-600 mb-8">Check out the latest additions to our store</p>
           <Products />
         </section>
-
-      <hr className="w-[80%] border-t border-gray-200 my-12" />
-      {/* All Products Section */}
-      <section className="text-center px-4">
-        <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">All Products</h2>
-        <p className="text-lg text-gray-600 mb-8">Browse our complete collection</p>
-        <Products />
-      </section>
-
-      <hr className="w-[80%] border-t border-gray-200 my-12" />
+           <hr className="w-[80%] border-t border-gray-200 my-12" />
       {/* Brands Section */}
       <section className="text-center px-4">
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">Brands</h2>
         <p className="text-lg text-gray-600 mb-8">Explore products from your favorite brands</p>
         <Brands />
       </section>
+
+      <hr className="w-[80%] border-t border-gray-200 my-12" />
+      {/* All Products Section */}
+      <section className="text-center px-4">
+        <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">Our Products</h2>
+        <p className="text-lg text-gray-600 mb-8">Browse our complete collection</p>
+        <Products />
+        <Button size="lg" className="mt-6 bg-primary text-white px-6 py-3 rounded-lg hover:bg-white hover:text-primary transition">
+          See More <FaArrowRight className="inline ml-2" />
+        </Button>
+      </section>
+
+   
 
       <hr className="w-[80%] border-t border-gray-200 my-12" />
         {/*Blog Section */}
