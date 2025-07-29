@@ -46,7 +46,7 @@ function Navbar() {
         </Button>
         </div>
         <Button className="bg-primary text-white hover:bg-white hover:text-primary border border-primary">
-          <a href="/login">Login</a>
+          <Link to="/login">Login</Link>
         </Button>
         <Button
           variant="outline"
