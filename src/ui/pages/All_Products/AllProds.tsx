@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProductCard from "@/ui/comps/ProductCard";
 import FiltersPanel, { type FilterState } from "./sections/filterPanel";
-import { Button } from "@/components/ui/button";
+
 
 const mockProducts = [
   {
@@ -11,7 +11,10 @@ const mockProducts = [
     price: 999,
     rating: 4.8,
     image: "/images/iphone14pro.png",   
-    type: "phone",
+    category: "phone",
+  description: "Latest Apple iPhone with A16 chip and Pro camera system.",
+  averageRatings: 4.8,
+  ratingQuantity: 100,
   },
   {
     _id: "2",
@@ -20,7 +23,10 @@ const mockProducts = [
     price: 149,
     rating: 4.2,
     image: "/images/galaxybuds2.png",
-    type: "accessory",
+     category: "accessory",
+    description: "Wireless earbuds with active noise cancellation.",
+    averageRatings: 4.2,
+    ratingQuantity: 50,
   },
   {
     _id: "3",
@@ -29,7 +35,10 @@ const mockProducts = [
     price: 899,
     rating: 4.6,
     image: "/images/pixel8.png",
-    type: "phone",
+     category: "phone",
+    description: "Latest Google Pixel with advanced AI features.",
+    averageRatings: 4.6,
+    ratingQuantity: 75,
   },
   {
     _id: "4",
@@ -38,7 +47,10 @@ const mockProducts = [
     price: 49,
     rating: 3.9,
     image: "/images/magsafe.png",
-    type: "accessory",
+     category: "accessory",
+    description: "MagSafe Charger for fast wireless charging.",
+    averageRatings: 3.9,
+    ratingQuantity: 25,
   },
 ];
 
@@ -64,7 +76,7 @@ export default function AllProductsPage() {
     const matchesBrand =
       filters.brands.length === 0 || filters.brands.includes(product.brand);
     const matchesType =
-      filters.types.length === 0 || filters.types.includes(product.type);
+      filters.types.length === 0 || filters.types.includes(product.category);
     const matchesPrice =
       product.price >= filters.minPrice && product.price <= filters.maxPrice;
     const matchesRating = product.rating >= filters.minRating;

@@ -31,7 +31,8 @@ function Navbar() {
       <ul className="hidden md:flex space-x-6 items-center">
         <li><Link to="/" className={navLink}>Shop</Link></li>
         <li><Link to="/AllProds" className={navLink}>All Products</Link></li>
-        <li><Link to="/brands" className={navLink}>Brands</Link></li>
+        <li><Link to="/about" className={navLink}>About</Link></li>
+        <li><Link to="/contact" className={navLink}>Contact</Link></li>
       </ul>
 
       {/* Auth Buttons (always visible) */}
@@ -51,7 +52,7 @@ function Navbar() {
           variant="outline"
           className="text-primary hover:bg-primary hover:text-white border border-primary"
         >
-          <a href="/register">Register</a>
+         <Link to='/signup'>Register</Link>
         </Button>
       </div>
 
@@ -60,7 +61,8 @@ function Navbar() {
         <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-6 md:hidden z-40">
           <Link to="/" className={navLink}>Shop</Link>
           <Link to="/AllProds" className={navLink}>All Products</Link>
-          <Link to="/brands" className={navLink}>Brands</Link>
+              <Link to="/about" className={navLink}>About</Link>
+              <Link to="/contact" className={navLink}>Contact</Link>
 
                <div className="flex space-x-2">
         <Button className="bg-white  border border-primary hover:bg-white">
@@ -73,13 +75,13 @@ function Navbar() {
           <div className="flex space-x-2 pt-2">
          
             <Button className="bg-primary text-white hover:bg-white hover:text-primary border border-primary">
-              <a href="/login">Login</a>
+              <Link to="/login">Login</Link>
             </Button>
             <Button
               variant="outline"
               className="text-primary hover:bg-primary hover:text-white border border-primary"
             >
-              <a href="/register">Register</a>
+              <Link to='/signup'>Register</Link>
             </Button>
           </div>
         </div>

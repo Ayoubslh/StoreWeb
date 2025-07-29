@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import ReviewCard from "@/ui/comps/Comments";
+import {Link} from "react-router-dom";
 
 import { useGetItem } from "@/apis/items/GetItem";
 import { useParams } from "react-router-dom";
@@ -67,7 +68,7 @@ export default function PhoneDetail() {
 
           <div className="flex space-x-2 mt-4">
             <Button size="lg">Add to Cart</Button>
-            <Button variant="outline" size="lg">Buy Now</Button>
+            <Button variant="outline" size="lg"><Link to="/checkout">Buy Now</Link></Button>
           </div>
         </div>
       </div>

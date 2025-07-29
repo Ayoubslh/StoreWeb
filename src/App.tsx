@@ -10,6 +10,11 @@ import OrderPage from './ui/pages/Orders/Orders';
 import FavouritesPage from './ui/pages/Favourites/favourite';
 import Home from './ui/pages/Home/Home';
 import AllProductsPage from './ui/pages/All_Products/AllProds';
+import CheckoutPage from './ui/pages/Orders/checkout';
+import SignupScreen from './ui/pages/auth/signup';
+import LoginScreen from './ui/pages/auth/login';
+import AboutPage from './ui/pages/statics/about';
+import ContactPage from './ui/pages/statics/contact';
 
 
 const queryClient = new QueryClient();
@@ -31,6 +36,12 @@ function App() {
         <Route path="/orders" element={<OrderPage />} />
         <Route path="/favourites" element={<FavouritesPage />} />
         <Route path="/AllProds" element={<AllProductsPage />} />
+        <Route path='/checkout' element={<CheckoutPage />} />
+        <Route path="/signup" element={<SignupScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+
       </Routes>
       <Footer />
     </div>

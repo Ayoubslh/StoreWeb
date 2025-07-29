@@ -5,9 +5,10 @@ export interface PhoneDetails {
   image: string;
   price: number;
   description: string;
-  specs: Specs;
+  specs?: Specs;
   averageRatings: number;
   ratingQuantity: number;
+  category: string; 
 
 }
 

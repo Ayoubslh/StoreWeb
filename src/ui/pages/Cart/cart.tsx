@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CartItemCard from "./../../comps/CartCard";
+import { Link } from "react-router-dom";
 
 const initialCart = [
   {
@@ -81,7 +82,7 @@ export default function CartPage() {
           <span>${total.toFixed(2)}</span>
         </div>
         <button className="mt-6 w-full bg-primary text-white py-2 rounded hover:bg-primary-foreground transition">
-          Proceed to Checkout
+         <Link to="/checkout">Proceed to Checkout</Link>
         </button>
       </div>
     </div>
