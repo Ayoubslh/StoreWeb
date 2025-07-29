@@ -80,7 +80,7 @@ function Home() {
       <section className="text-center px-4">
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">What Our Customers Say</h2>
         <p className="text-lg text-gray-600 mb-8">Read reviews from our satisfied customers</p>
-         {/* <Reviews /> */}
+         <Reviews />
       </section>
       <hr className="w-[80%] border-t border-gray-200 my-12" />
     
