@@ -8,13 +8,13 @@ import {
 import ReviewCard from "@/ui/comps/Comments";
 import { useEffect, useState } from "react";
 
-// Custom hook to detect screen width
+
 function useIsSmallScreen() {
   const [isSmall, setIsSmall] = useState(false);
 
   useEffect(() => {
     const checkScreen = () => {
-      setIsSmall(window.innerWidth < 768); // Tailwind's `md` breakpoint
+      setIsSmall(window.innerWidth <= 768); // Tailwind's `md` breakpoint
     };
 
     checkScreen();
