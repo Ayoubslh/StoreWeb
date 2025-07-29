@@ -69,8 +69,8 @@ function Home() {
       <hr className="w-[80%] border-t border-gray-200 my-12" />
         {/*Blog Section */}
       <section className="text-center px-4">
-        <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">From Our Blog</h2>
-        <p className="text-lg text-gray-600 mb-8">Latest news and updates from our store</p>
+        <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">From Various Blogs</h2>
+        <p className="text-lg text-gray-600 mb-8">News and insights from the tech world</p>
         <BlogSection />
       
       </section>
