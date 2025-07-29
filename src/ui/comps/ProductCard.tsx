@@ -60,7 +60,7 @@ function VCard({ item }: { item: PhoneDetails }) {
               className={clsx(
                 "p-2 border text-white transition-colors",
                 {
-                  "bg-primary hover:bg-white hover:text-primary border-primary": true,
+                  "bg-primary hover:bg-white  hover:text-primary border-primary": true,
                   "bg-white text-primary": isPressed,
                 }
               )}
@@ -77,7 +77,7 @@ function VCard({ item }: { item: PhoneDetails }) {
                 }
               )}
             >
-              <FaHeartCirclePlus className="text-xl md:text-2xl" />
+              <FaHeartCirclePlus className="text-lg md:text-2xl" />
             </Button>
           </div>
         </CardFooter>

@@ -18,7 +18,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-    <div className='bg-background text-white min-h-screen min-w-screen'>
+    <div className='bg-background text-whitemin-h-screen min-w-screen'>
       <p className='text-lg font-bold text-white text-center  bg-primary p-4'>
         Welcome to StoreWeb! Your one-stop shop for all your needs.
       </p>
