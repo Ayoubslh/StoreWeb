@@ -29,9 +29,9 @@ function Navbar() {
 
       {/* Right - Links (Desktop only) */}
       <ul className="hidden md:flex space-x-6 items-center">
-        <li><a href="/" className={navLink}>Shop</a></li>
-        <li><a href="/products" className={navLink}>All Products</a></li>
-        <li><a href="/brands" className={navLink}>Brands</a></li>
+        <li><Link to="/" className={navLink}>Shop</Link></li>
+        <li><Link to="/AllProds" className={navLink}>All Products</Link></li>
+        <li><Link to="/brands" className={navLink}>Brands</Link></li>
       </ul>
 
       {/* Auth Buttons (always visible) */}
@@ -58,9 +58,10 @@ function Navbar() {
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-6 md:hidden z-40">
-          <a href="/" className={navLink}>Shop</a>
-          <a href="/products" className={navLink}>All Products</a>
-          <a href="/brands" className={navLink}>Brands</a>
+          <Link to="/" className={navLink}>Shop</Link>
+          <Link to="/AllProds" className={navLink}>All Products</Link>
+          <Link to="/brands" className={navLink}>Brands</Link>
+
                <div className="flex space-x-2">
         <Button className="bg-white  border border-primary hover:bg-white">
           <Link to="/cart"><FaCartShopping  className="text-primary" /></Link>

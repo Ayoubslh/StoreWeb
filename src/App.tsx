@@ -9,6 +9,7 @@ import CartPage from './ui/pages/Cart/cart';
 import OrderPage from './ui/pages/Orders/Orders';
 import FavouritesPage from './ui/pages/Favourites/favourite';
 import Home from './ui/pages/Home/Home';
+import AllProductsPage from './ui/pages/All_Products/AllProds';
 
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/orders" element={<OrderPage />} />
         <Route path="/favourites" element={<FavouritesPage />} />
+        <Route path="/AllProds" element={<AllProductsPage />} />
       </Routes>
       <Footer />
     </div>

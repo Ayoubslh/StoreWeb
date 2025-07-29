@@ -51,7 +51,7 @@ function VCard({
       <CardDescription className="flex flex-col items-center justify-center p-4">
         <CardTitle
           className={clsx(
-            "text-2xl font-bold sm:text-lg md:text-xl transition-colors duration-300",
+            "text-2xl font-bold sm:text-lg sm:shrink-0 md:text-xl transition-colors duration-300",
             {
               "text-primary": isPressed,
               "group-hover:text-primary": true,

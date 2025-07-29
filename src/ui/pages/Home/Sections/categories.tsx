@@ -28,7 +28,7 @@ const categories = [
 
 function Categories(){
   return (
-    <div className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center items-center p-8">
+    <div className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8   justify-center items-center p-8">
       {categories.map((category) => (
         <VCard key={category.id} name={category.name} icon={category.icon} />
       ))}
