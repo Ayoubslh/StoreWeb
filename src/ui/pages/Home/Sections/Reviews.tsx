@@ -8,19 +8,20 @@ import {
 import ReviewCard from "@/ui/comps/Comments";
 import { useEffect, useState } from "react";
 
-
-function useIsSmallScreen() {
-  const [isSmall, setIsSmall] = useState(false);
+// ✅ Hook for responsive orientation
+function useIsSmallScreen(breakpoint = 768) {
+  const [isSmall, setIsSmall] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < breakpoint : false
+  );
 
   useEffect(() => {
-    const checkScreen = () => {
-      setIsSmall(window.innerWidth <= 768); // Tailwind's `md` breakpoint
-    };
+    const mediaQuery = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const updateScreen = () => setIsSmall(mediaQuery.matches);
 
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
-  }, []);
+    updateScreen();
+    mediaQuery.addEventListener("change", updateScreen);
+    return () => mediaQuery.removeEventListener("change", updateScreen);
+  }, [breakpoint]);
 
   return isSmall;
 }
@@ -70,14 +71,18 @@ function Reviews() {
         className="w-full max-w-5xl mx-auto relative overflow-visible px-2"
         orientation={orientation}
       >
+        {/* ✅ Previous button */}
         <CarouselPrevious
           className={`absolute ${
-            isSmallScreen ? "top-2 left-1/2 -translate-x-1/2" : "left-2 top-1/2 -translate-y-1/2"
+            isSmallScreen
+              ? "top-2 left-1/2 -translate-x-1/2"
+              : "left-2 top-1/2 -translate-y-1/2"
           } z-10 text-black bg-white shadow rounded-full p-2 hover:bg-gray-100 transition`}
         >
           &lt;
         </CarouselPrevious>
 
+        {/* ✅ Carousel items */}
         <CarouselContent className="flex">
           {reviews.map((review, index) => (
             <CarouselItem
@@ -91,9 +96,12 @@ function Reviews() {
           ))}
         </CarouselContent>
 
+        {/* ✅ Next button */}
         <CarouselNext
           className={`absolute ${
-            isSmallScreen ? "bottom-2 left-1/2 -translate-x-1/2" : "right-2 top-1/2 -translate-y-1/2"
+            isSmallScreen
+              ? "bottom-2 left-1/2 -translate-x-1/2"
+              : "right-2 top-1/2 -translate-y-1/2"
           } z-10 text-black bg-white shadow rounded-full p-2 hover:bg-gray-100 transition`}
         >
           &gt;
