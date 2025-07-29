@@ -15,6 +15,7 @@ import SignupScreen from './ui/pages/auth/signup';
 import LoginScreen from './ui/pages/auth/login';
 import AboutPage from './ui/pages/statics/about';
 import ContactPage from './ui/pages/statics/contact';
+import AccountPage from './ui/pages/profile/account';
 
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ function App() {
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/profile" element={<AccountPage />} />
 
       </Routes>
       <Footer />

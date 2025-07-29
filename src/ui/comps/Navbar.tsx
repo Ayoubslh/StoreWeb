@@ -4,9 +4,11 @@ import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const isLoggedIn = true; // Replace with actual authentication logic
 
   const navLink =
     "relative text-primary text-lg font-medium transition duration-300 hover:text-primary-foreground underline-animation";
@@ -45,7 +47,10 @@ function Navbar() {
           <Link to="/favourites"><FaHeart className="text-primary"  /></Link>
         </Button>
         </div>
-        <Button className="bg-primary text-white hover:bg-white hover:text-primary border border-primary">
+       {isLoggedIn?   <Link to="/profile"> <Avatar className="h-10 w-10">
+          <AvatarImage src={ "https://i.pravatar.cc/150?img=20"} />
+          <AvatarFallback>MEMEME</AvatarFallback>
+        </Avatar>  </Link>  :<><Button className="bg-primary text-white hover:bg-white hover:text-primary border border-primary">
           <Link to="/login">Login</Link>
         </Button>
         <Button
@@ -54,6 +59,7 @@ function Navbar() {
         >
          <Link to='/signup'>Register</Link>
         </Button>
+        </> }
       </div>
 
       {/* Mobile Menu Dropdown */}
