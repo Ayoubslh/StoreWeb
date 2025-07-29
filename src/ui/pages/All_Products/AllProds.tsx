@@ -75,19 +75,20 @@ export default function AllProductsPage() {
   });
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-8">
+    <section className="max-w-7xl mx-auto py-8 ">
       <h1 className="text-3xl font-bold mb-6 text-center">All Products</h1>
 
-      <div className="flex flex-col lg:flex-row gap-6  ">
+      <div className="w-full flex flex-col lg:flex-row gap-6">   
         {/* Filters Panel */}
         <aside className="w-full lg:w-1/4">
           <FiltersPanel filters={filters} setFilters={setFilters} />
         </aside>
 
-        {/* Products Grid */}
-        <main className="w-full lg:w-3/4">
+      
+        <main className="w-full ">
           {filteredProducts.length > 0 ? (
-        <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(20px,1fr))]">
+        <div className="grid w-full gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          
   {filteredProducts.map((product) => (
     <ProductCard key={product._id} item={product} />
   ))}

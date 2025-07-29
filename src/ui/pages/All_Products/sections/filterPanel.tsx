@@ -10,7 +10,7 @@ export interface FilterState {
   maxPrice: number;
   minRating: number;
   brands: string[];
-  types: string[]; // ✅ New: for categories like "phone", "accessory"
+  types: string[]; 
 }
 
 interface Props {
@@ -74,6 +74,7 @@ export default function FiltersPanel({ filters, setFilters }: Props) {
           onValueChange={([min, max]) =>
             setLocalFilters({ ...localFilters, minPrice: min, maxPrice: max })
           }
+          className="mt-3"
         />
       </div>
 
@@ -88,6 +89,7 @@ export default function FiltersPanel({ filters, setFilters }: Props) {
           onValueChange={([rating]) =>
             setLocalFilters({ ...localFilters, minRating: rating })
           }
+          className="mt-3"
         />
       </div>
 
