@@ -51,7 +51,7 @@ export default function CheckoutPage() {
     useOrderStore.getState().addOrder(order);
     
     alert("Order placed successfully!");
-    navigate("/orders");
+    navigate("/profile");
   };
 
   return (

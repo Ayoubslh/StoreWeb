@@ -1,63 +1,54 @@
 import { FaHeart } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { FaHeartCrack } from "react-icons/fa6";
 import ProductCard from "@/ui/comps/ProductCard";
-import type { PhoneDetails } from "@/Types/phone";
 import { useFavouriteStore } from "@/store/useFavouritesStore";
 import { useEffect, useState } from "react";
-
-
-
+import type { PhoneDetails } from "@/Types/phone";
 
 export default function FavouritesPage() {
   const favouritePhones = useFavouriteStore((state) => state.items);
- const [favourite, setFavourite] = useState(() =>
+  const [favourite, setFavourite] = useState(() =>
     favouritePhones.map((item) => ({ ...item, selected: true }))
   );
+
   useEffect(() => {
     setFavourite((prev) => {
-      const updated = favouritePhones.map((item) => {
+      return favouritePhones.map((item) => {
         const prevItem = prev.find((p) => p._id === item._id);
         return {
           ...item,
           selected: prevItem ? prevItem.selected : true,
         };
       });
-      return updated;
     });
   }, [favouritePhones]);
-  if (favouritePhones.length === 0) {
-    return (
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        <h1 className="text-2xl font-bold text-center">No Favourites Yet</h1>
-        <p className="text-center text-gray-500 mt-4">
-          You haven't added any favourites yet. Start exploring products and add them to your favourites!
-        </p>
-      </div>
-    );
-  }
+
   return (
-    <div
-      
-      className="max-w-6xl mx-auto px-4 py-10"
-    >
+    <div className="max-w-6xl mx-auto px-4 py-10">
       <div className="flex items-center gap-2 mb-4">
-        <FaHeart className="text-primary text-2xl" />
-        <h1 className="text-2xl font-bold">My Favourites ({favouritePhones.length})</h1>
+        <FaHeart className="text-brand-primary text-2xl" />
+        <h1 className="text-2xl font-bold">
+          My Favourites ({favouritePhones.length})
+        </h1>
       </div>
 
       <hr className="border-t border-gray-300 mb-6" />
 
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {favouritePhones.length === 0 ? (
-          <p className="text-gray-500 text-lg text-center col-span-full">
-            You haven't added any favorites yet.
+      {favouritePhones.length === 0 ? (
+        <div className="flex flex-col items-center justify-center text-center py-20">
+          <FaHeartCrack className="text-6xl text-gray-400 mb-4" />
+          <h2 className="text-xl font-semibold text-gray-700">No Favourites Yet</h2>
+          <p className="text-gray-500 mt-2 max-w-md">
+            You haven't added any favourites yet. Browse products and click the heart icon to save them here.
           </p>
-        ) : (
-          favouritePhones.map((phone) => (
+        </div>
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {favourite.map((phone) => (
             <ProductCard key={phone._id} item={phone} />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
