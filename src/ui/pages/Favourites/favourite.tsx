@@ -2,43 +2,29 @@ import { FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import ProductCard from "@/ui/comps/ProductCard";
 import type { PhoneDetails } from "@/Types/phone";
+import { useFavouriteStore } from "@/store/useFavouritesStore";
+import { useEffect, useState } from "react";
+import { useCartStore } from "@/store/useCartStore";
 
-const favouritePhones: PhoneDetails[] = [
-  {
-    _id: "1",
-    name: "Samsung Galaxy S24 Ultra",
-    brand: "Samsung",
-    image:
-      "https://fdn.gsmarena.com/imgroot/reviews/24/samsung-galaxy-s24-ultra/lifestyle/-1024w2/gsmarena_001.jpg",
-    price: 1399,
-    ratingAverage: 4.7,
-    ratingQuantity: 1034,
-    specs: {},
-  },
-  {
-    _id: "2",
-    name: "Apple iPhone 15 Pro Max",
-    brand: "Apple",
-    image:
-      "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-15-pro-max-1.jpg",
-    price: 1299,
-    ratingAverage: 4.8,
-    ratingQuantity: 2043,
-    specs: {},
-  },
-  {
-    _id: "3",
-    name: "OnePlus 12",
-    brand: "OnePlus",
-    image: "https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-12-1.jpg",
-    price: 899,
-    ratingAverage: 4.6,
-    ratingQuantity: 810,
-    specs: {},
-  },
-];
+
 
 export default function FavouritesPage() {
+  const favouritePhones = useFavouriteStore((state) => state.items);
+ const [favourite, setFavourite] = useState(() =>
+    favouritePhones.map((item) => ({ ...item, selected: true }))
+  );
+  useEffect(() => {
+    setFavourite((prev) => {
+      const updated = favouritePhones.map((item) => {
+        const prevItem = prev.find((p) => p._id === item._id);
+        return {
+          ...item,
+          selected: prevItem ? prevItem.selected : true,
+        };
+      });
+      return updated;
+    });
+  }, [favouritePhones]);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

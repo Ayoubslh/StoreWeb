@@ -4,21 +4,10 @@ import * as yup from "yup";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useOrderStore } from "@/store/useOrderStore";
+import { useLocation,useNavigate } from "react-router-dom";
 
-const cartItems = [
-  {
-    id: "1",
-    name: "iPhone 14 Pro",
-    price: 999,
-    quantity: 1,
-  },
-  {
-    id: "2",
-    name: "Galaxy Buds 2",
-    price: 149,
-    quantity: 2,
-  },
-];
+
 
 const schema = yup.object().shape({
   name: yup.string().required("Full name is required"),
@@ -30,11 +19,15 @@ const schema = yup.object().shape({
   expiry: yup.string().required("Expiry Date is required"),
   cvc: yup.string().required("CVC is required"),
   nameOnCard: yup.string().required("Name on card is required"),
-});
+}); 
 
 type FormData = yup.InferType<typeof schema>;
 
 export default function CheckoutPage() {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const cartItems = state?.cartItems ? JSON.parse(state.cartItems) : [];
+  console.log("Cart items in checkout:", cartItems);
   const subtotal = cartItems.reduce((t, item) => t + item.price * item.quantity, 0);
   const shipping = 20;
   const total = subtotal + shipping;
@@ -48,7 +41,17 @@ export default function CheckoutPage() {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log("Order submitted", data);
+    const order = {
+      ...data,
+      items: cartItems,
+      totalPrice: total,
+      status: "pending" as "pending",
+      orderDate: new Date().toISOString(),
+    };
+    useOrderStore.getState().addOrder(order);
+    
+    alert("Order placed successfully!");
+    navigate("/orders");
   };
 
   return (
@@ -147,7 +150,7 @@ export default function CheckoutPage() {
                 <span>${total.toFixed(2)}</span>
               </div>
             </div>
-            <Button type="submit" className="mt-6 w-full">
+            <Button type="submit" className="mt-6 w-full " >
               Place Order
             </Button>
           </div>

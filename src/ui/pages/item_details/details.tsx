@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import ReviewCard from "@/ui/comps/Comments";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 
 import { useGetItem } from "@/apis/items/GetItem";
 import { useParams } from "react-router-dom";
@@ -38,9 +38,22 @@ const reviews = [
 export default function PhoneDetail() {
   const { id } = useParams<{ id: string }>();
   const { data: phone } = useGetItem(id);
+  const navigate = useNavigate();
 
   if (!phone) {
     return <div>Loading...</div>;
+  }
+  function handleClick(id: string) {
+    if (!phone) return;
+    navigate('/checkout', { state: { cartItems: JSON.stringify([{_id: id,
+    name: phone.name,
+    price: phone.price,
+    quantity: 1,
+    image: phone.image,
+    brand: phone.brand,
+    selected: true,
+
+  }] ) } });
   }
 
   return (
@@ -68,7 +81,7 @@ export default function PhoneDetail() {
 
           <div className="flex space-x-2 mt-4">
             <Button size="lg">Add to Cart</Button>
-            <Button variant="outline" size="lg"><Link to="/checkout">Buy Now</Link></Button>
+            <Button variant="outline" size="lg" onClick={() => handleClick(phone._id)}>Buy Now</Button>
           </div>
         </div>
       </div>

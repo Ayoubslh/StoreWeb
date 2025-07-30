@@ -1,57 +1,36 @@
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { useOrderStore } from "@/store/useOrderStore";
 
-const orders = [
-  {
-    id: "ORD-872394",
-    date: "2025-07-28",
-    status: "Delivered",
-    items: [
-      {
-        id: "1",
-        name: "Samsung Galaxy Z Fold5",
-        brand: "Samsung",
-        image:
-          "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-z-fold5-1.jpg",
-        price: 1799,
-        quantity: 1,
-      },
-    ],
-  },
-  {
-    id: "ORD-872395",
-    date: "2025-07-20",
-    status: "Processing",
-    items: [
-      {
-        id: "2",
-        name: "iPhone 15 Pro Max",
-        brand: "Apple",
-        image:
-          "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-15-pro-max-1.jpg",
-        price: 1299,
-        quantity: 2,
-      },
-    ],
-  },
-  {
-    id: "ORD-872396",
-    date: "2025-07-10",
-    status: "Shipped",
-    items: [
-      {
-        id: "3",
-        name: "OnePlus 12",
-        brand: "OnePlus",
-        image:
-          "https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-12-1.jpg",
-        price: 899,
-        quantity: 1,
-      },
-    ],
-  },
-];
+
 
 export default function OrderPage() {
+  const orders = useOrderStore((state) => state.orders);
+  console.log("Orders:", orders); 
+    const[order, setOrders] = useState(()=>
+    orders.map((order) => ({
+      ...order,
+      items: order.items.map((item) => ({
+        ...item,
+        selected: true,
+      })),
+    })),
+  );
+useEffect(() => {
+    setOrders((prev) => {
+      const updated = orders.map((order) => {
+        const prevOrder = prev.find((p) => p._id === order._id);
+        return {
+          ...order,
+          items: (prevOrder ? prevOrder.items : order.items).map((item) => ({
+            ...item,
+            selected: item.selected ?? true,
+          })),
+        };
+      });
+      return updated;
+    });
+  }, []);
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-6 text-black">
       <h1 className="text-2xl font-bold mb-4">My Orders</h1>
@@ -64,14 +43,14 @@ export default function OrderPage() {
 
         return (
           <div
-            key={order.id}
+            key={order._id}
             className="bg-white border shadow-sm p-6 rounded-xl space-y-4"
           >
             {/* Header */}
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-bold text-lg">{order.id}</h2>
-                <p className="text-sm text-gray-500">{order.date}</p>
+                <h2 className="font-bold text-lg">{order._id}</h2>
+                <p className="text-sm text-gray-500">{order.orderDate}</p>
               </div>
               <span className="text-sm text-primary font-semibold">
                 {order.status}
@@ -81,7 +60,7 @@ export default function OrderPage() {
             {/* Items */}
             <div className="space-y-3">
               {order.items.map((item) => (
-                <div key={item.id} className="flex gap-4 items-center">
+                <div key={item._id} className="flex gap-4 items-center">
                   <img
                     src={item.image}
                     alt={item.name}

@@ -11,6 +11,8 @@ import type { PhoneDetails } from "@/Types/phone";
 import { FaCartPlus, FaHeartCirclePlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+import { useFavouriteStore } from "@/store/useFavouritesStore";
+import { useCartStore } from "@/store/useCartStore";
 
 function VCard({ item }: { item: PhoneDetails }) {
   const [isPressed, setIsPressed] = useState(false);
@@ -19,7 +21,17 @@ function VCard({ item }: { item: PhoneDetails }) {
   const handlePressEnd = () => setIsPressed(false);
 
   return (
-    <Link
+   
+      <Card
+        className={clsx(
+          " sm:w-[200px] md:w-[250px] bg-white rounded-2xl shadow-lg transition-transform duration-300 border-2",
+          {
+            "hover:shadow-xl hover:-translate-y-2 hover:border-primary": !isPressed,
+            "border-transparent": !isPressed,
+            "border-primary shadow-xl scale-[1.02]": isPressed,
+          }
+        )}
+      > <Link
       to={`/details/${item._id}`}
       className="no-underline"
       role="button"
@@ -30,16 +42,6 @@ function VCard({ item }: { item: PhoneDetails }) {
       onMouseUp={handlePressEnd}
       onMouseLeave={handlePressEnd}
     >
-      <Card
-        className={clsx(
-          " sm:w-[200px] md:w-[250px] bg-white rounded-2xl shadow-lg transition-transform duration-300 border-2",
-          {
-            "hover:shadow-xl hover:-translate-y-2 hover:border-primary": !isPressed,
-            "border-transparent": !isPressed,
-            "border-primary shadow-xl scale-[1.02]": isPressed,
-          }
-        )}
-      >
         <CardHeader className="flex justify-center">
           <div className="w-full aspect-[4/3]">
             <img
@@ -56,6 +58,7 @@ function VCard({ item }: { item: PhoneDetails }) {
           </CardTitle>
           <p className="text-xs text-gray-500">{item.brand}</p>
         </CardContent>
+         </Link>
 
         <CardFooter className="flex flex-wrap justify-between items-center gap-2 mt-2">
           <p className="text-sm sm:text-base font-semibold">${item.price}</p>
@@ -70,6 +73,7 @@ function VCard({ item }: { item: PhoneDetails }) {
                   "bg-white text-primary border-primary": isPressed,
                 }
               )}
+              onClick={() => useCartStore.getState().addItem(item)}
             >
               <FaCartPlus className="text-base sm:text-lg" />
             </Button>
@@ -83,13 +87,14 @@ function VCard({ item }: { item: PhoneDetails }) {
                   "bg-white text-primary border-primary": isPressed,
                 }
               )}
+              onClick={() => useFavouriteStore.getState().toggleFavourite(item)}
             >
               <FaHeartCirclePlus className="text-base sm:text-lg" />
             </Button>
           </div>
         </CardFooter>
       </Card>
-    </Link>
+   
   );
 }
 

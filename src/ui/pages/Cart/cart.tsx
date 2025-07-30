@@ -1,35 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartItemCard from "./../../comps/CartCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCartStore } from "@/store/useCartStore";
 
-const initialCart = [
-  {
-    id: "1",
-    name: "Galaxy Z Fold5",
-    brand: "Samsung",
-    image: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-z-fold5-1.jpg",
-    price: 1799,
-    quantity: 1,
-    selected: true,
-  },
-  {
-    id: "2",
-    name: "iPhone 15 Pro Max",
-    brand: "Apple",
-    image: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-15-pro-max-1.jpg",
-    price: 1299,
-    quantity: 2,
-    selected: false,
-  },
-];
+
+
+
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState(initialCart);
+   const initialCart = useCartStore((state) => state.items);
+   const navigate = useNavigate();
+   console.log(initialCart);
+ 
+const [cartItems, setCartItems] = useState(() =>
+  initialCart.map((item) => ({ ...item, selected: true }))
+);
+
+const handleClick = (selectedItems: any[]) => {
+  if (selectedItems.length === 0) {
+    alert("Please select at least one item to proceed.");
+    return;}
+
+  navigate('/checkout', { state: { cartItems: JSON.stringify(selectedItems) } });
+}
+ 
+
+  useEffect(() => {
+  setCartItems((prev) => {
+    const updated =  initialCart.map((item) => {
+      const prevItem = prev.find((p) => p._id === item._id);
+      return {
+        ...item,
+        selected: prevItem ? prevItem.selected : true,
+      };
+    });
+    return updated;
+  });
+}, [ initialCart]);
+
 
   const toggleSelection = (id: string) => {
     setCartItems(prev =>
       prev.map(item =>
-        item.id === id ? { ...item, selected: !item.selected } : item
+        item._id === id ? { ...item, selected: !item.selected } : item
       )
     );
   };
@@ -37,7 +50,7 @@ export default function CartPage() {
   const handleQuantityChange = (id: string, delta: number) => {
     setCartItems(prev =>
       prev.map(item =>
-        item.id === id
+        item._id === id
           ? { ...item, quantity: Math.max(1, item.quantity + delta) }
           : item
       )
@@ -57,7 +70,7 @@ export default function CartPage() {
         <h1 className="text-2xl font-bold mb-2">Shopping Cart</h1>
         {cartItems.map(item => (
           <CartItemCard
-            key={item.id}
+            key={item._id}
             item={item}
             toggleSelection={toggleSelection}
             handleQuantityChange={handleQuantityChange}
@@ -70,7 +83,7 @@ export default function CartPage() {
         <h2 className="text-xl font-bold mb-4">Summary</h2>
         <div className="space-y-2">
           {selectedItems.map(item => (
-            <div key={item.id} className="flex justify-between text-sm ">
+            <div key={item._id} className="flex justify-between text-sm ">
               <span>{item.name} x{item.quantity}</span>
               <span>${item.price * item.quantity}</span>
             </div>
@@ -81,8 +94,8 @@ export default function CartPage() {
           <span>Total</span>
           <span>${total.toFixed(2)}</span>
         </div>
-        <button className="mt-6 w-full bg-primary text-white py-2 rounded hover:bg-primary-foreground transition">
-         <Link to="/checkout">Proceed to Checkout</Link>
+        <button className="mt-6 w-full bg-primary text-white py-2 rounded hover:bg-primary-foreground transition" onClick={()=>handleClick(selectedItems)}>
+         Proceed to Checkout
         </button>
       </div>
     </div>

@@ -5,7 +5,7 @@ import paypal from "@/assets/payments/paypal.svg";
 
 function Footer() {
   return (
-    <footer className="bg-primary text-white py-10 px-6 md:px-12">
+    <footer className="bg-primary text-white py-10 px-6 md:px-12 bottom-0">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 text-sm sm:text-base">
         {/* Column 1: Brand Info */}
         <div className="space-y-4">
