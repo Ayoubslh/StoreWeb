@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useUserStore } from "@/store/useUser";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const isLoggedIn = true; // Replace with actual authentication logic
+  const isLoggedIn = useUserStore((state) => state.isAuthenticated);
 
   const navLink =
     "relative text-primary text-lg font-medium transition duration-300 hover:text-primary-foreground underline-animation";

@@ -66,7 +66,7 @@ export default function AccountPage() {
                   <Input {...register("email")} type="email" placeholder="you@example.com" />
                 </div>
 
-                <Button type="submit" className="bg-brand-primary text-white hover:bg-opacity-90">
+                <Button type="submit" className="bgbrand-primary text-white hover:bg-opacity-90">
                   Save Changes
                 </Button>
               </form>

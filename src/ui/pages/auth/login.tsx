@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../../apis/auth/login"; // Adjust the import path as necessary
+
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -10,6 +12,7 @@ const loginSchema = z.object({
 });
 
 export default function LoginPage() {
+  const loginMutation = useLogin();
   const {
     register,
     handleSubmit,
@@ -19,6 +22,7 @@ export default function LoginPage() {
   });
 
   const onSubmit = (data: any) => {
+    loginMutation.mutate(data);
     console.log("Login:", data);
   };
 
@@ -55,9 +59,7 @@ export default function LoginPage() {
               type="submit"
               className="w-full bg-[#C67C4E] text-white py-2 rounded"
             >
-               <Link to="/home" className="text-[#C67C4E] underline">
-                Login
-              </Link>
+              Login
             </button>
 
             <p className="text-center text-sm mt-4">

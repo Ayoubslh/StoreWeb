@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import CartItemCard from "./../../comps/CartCard";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,redirect } from "react-router-dom";
 import { useCartStore } from "@/store/useCartStore";
+import { useUserStore } from "@/store/useUser";
 
 
 
 
 
 export default function CartPage() {
+  const isLoggedIn = useUserStore((state) => state.isAuthenticated);
+  if (!isLoggedIn) {
+    redirect('/login');
+  }
    const initialCart = useCartStore((state) => state.items);
    const navigate = useNavigate();
    console.log(initialCart);
