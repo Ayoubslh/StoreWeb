@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useForm } from "react-hook-form";
+import {Link} from "react-router-dom";
 
 export default function AccountPage() {
   const { register, handleSubmit } = useForm({
@@ -56,7 +57,7 @@ export default function AccountPage() {
           <CardTitle>My Orders</CardTitle>
         </CardHeader>
         <CardContent className="text-gray-600">
-          <p>You have 3 past orders. <a href="/orders" className="text-brand-primary underline">View all orders</a>.</p>
+          <p>You have 3 past orders. <Link to="/orders" className="text-brand-primary underline">View all orders</Link>.</p>
         </CardContent>
       </Card>
 

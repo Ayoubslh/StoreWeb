@@ -4,7 +4,7 @@ import ProductCard from "@/ui/comps/ProductCard";
 import type { PhoneDetails } from "@/Types/phone";
 import { useFavouriteStore } from "@/store/useFavouritesStore";
 import { useEffect, useState } from "react";
-import { useCartStore } from "@/store/useCartStore";
+
 
 
 
@@ -25,11 +25,19 @@ export default function FavouritesPage() {
       return updated;
     });
   }, [favouritePhones]);
+  if (favouritePhones.length === 0) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        <h1 className="text-2xl font-bold text-center">No Favourites Yet</h1>
+        <p className="text-center text-gray-500 mt-4">
+          You haven't added any favourites yet. Start exploring products and add them to your favourites!
+        </p>
+      </div>
+    );
+  }
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+    <div
+      
       className="max-w-6xl mx-auto px-4 py-10"
     >
       <div className="flex items-center gap-2 mb-4">
@@ -50,6 +58,6 @@ export default function FavouritesPage() {
           ))
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
