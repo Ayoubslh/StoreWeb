@@ -10,15 +10,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
+
+import {  Navigate } from "react-router-dom";
 import OrderPage from "../Orders/Orders";
 import { useUserStore } from "@/store/useUser";
 import UserInfo from "./comps/tab/userinfo";
 import UpdatePassword from "./comps/tab/updatePassword";
-import { toast } from "sonner";
+
 
 export default function AccountPage() {
 

@@ -39,7 +39,7 @@ const addCartItem = async (items: CartItems): Promise<CartItems> => {
 export const useAddCartItem = () => {
   return useMutation<CartItems, Error, CartItems>({
     mutationFn: addCartItem,
-    onSuccess: (data) => {
+    onSuccess: () => {
    
       toast('Item added to cart successfully', {
         description: "Your item has been added to the cart.",

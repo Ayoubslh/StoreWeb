@@ -40,7 +40,6 @@ function VCard({ item , quantity }: { item: PhoneDetails , quantity: number }) {
       price: item.price,
       image: item.image,
       brand: item.brand,
-      selected: true,
     });
     addtoCart.mutate(items);
       toast('Item added to cart successfully', {
