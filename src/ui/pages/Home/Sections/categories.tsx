@@ -1,5 +1,5 @@
 import { IoPhonePortraitOutline } from "react-icons/io5";
-import { CiHeadphones } from "react-icons/ci";
+import { FaTabletAlt } from "react-icons/fa";
 import { IoIosLaptop } from "react-icons/io";
 import { BsSmartwatch } from "react-icons/bs";
 import VCard from "@/ui/comps/VerticalCard";
@@ -11,8 +11,8 @@ const categories = [
   },
   {
     id: '2',
-    name: 'Earphones',
-    icon: <CiHeadphones className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
+    name: 'Tablets',
+    icon: <FaTabletAlt className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
   },
   {
     id: '3',
@@ -30,7 +30,7 @@ function Categories(){
   return (
     <div className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8   justify-center items-center p-8">
       {categories.map((category) => (
-        <VCard key={category.id} name={category.name} icon={category.icon} />
+        <VCard key={category.id} name={category.name} icon={category.icon} description="" />
       ))}
     </div>
   );

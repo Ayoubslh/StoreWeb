@@ -6,6 +6,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
+import { useGetAllItems } from "@/apis/items/GetAllItems";
 
 function HCard({
   name,
@@ -17,8 +19,10 @@ function HCard({
   description?: string;
 }) {
   const [isTouched, setIsTouched] = useState(false);
+  const navigate = useNavigate();
 
   return (
+
     <Card
       className={clsx(
         "group flex flex-row max-w-md bg-white shadow-md transition-all duration-300 border-2 items-center overflow-hidden",
@@ -30,6 +34,10 @@ function HCard({
       )}
       onTouchStart={() => setIsTouched(true)}
       onTouchEnd={() => setTimeout(() => setIsTouched(false), 300)} // smooth release
+      onClick={() => {
+        
+        navigate(`/AllProds?brand=${name}`);
+      }}
     >
       <div
         className={clsx(

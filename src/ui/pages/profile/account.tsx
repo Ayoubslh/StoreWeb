@@ -15,21 +15,19 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import OrderPage from "../Orders/Orders";
+import { useUserStore } from "@/store/useUser";
+import UserInfo from "./comps/tab/userinfo";
+import UpdatePassword from "./comps/tab/updatePassword";
 
 export default function AccountPage() {
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      name: "Ayoub Salhi",
-      email: "ayoub@email.com",
-    },
-  });
+
 
   const onSubmit = (data: any) => {
     console.log("Updated account info:", data);
   };
 
   const handleLogout = () => {
-    // Add your logout logic here
+    useUserStore.getState().logout();
     console.log("User logged out");
   };
 
@@ -55,21 +53,7 @@ export default function AccountPage() {
               <CardTitle>User Information</CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Full Name</label>
-                  <Input {...register("name")} placeholder="Your name" />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Email</label>
-                  <Input {...register("email")} type="email" placeholder="you@example.com" />
-                </div>
-
-                <Button type="submit" className="bgbrand-primary text-white hover:bg-opacity-90">
-                  Save Changes
-                </Button>
-              </form>
+              <UserInfo />
             </CardContent>
           </Card>
 
@@ -78,21 +62,7 @@ export default function AccountPage() {
               <CardTitle>Change Password</CardTitle>
             </CardHeader>
             <CardContent>
-              <form className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Current Password</label>
-                  <Input type="password" placeholder="••••••••" />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">New Password</label>
-                  <Input type="password" placeholder="••••••••" />
-                </div>
-
-                <Button type="submit" className="bg-brand-primary text-white hover:bg-opacity-90">
-                  Update Password
-                </Button>
-              </form>
+              <UpdatePassword /> 
             </CardContent>
           </Card>
 

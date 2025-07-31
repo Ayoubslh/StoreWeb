@@ -6,18 +6,20 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useOrderStore } from "@/store/useOrderStore";
 import { useLocation,useNavigate } from "react-router-dom";
+import { Phone } from "lucide-react";
 
 
 
 const schema = yup.object().shape({
   name: yup.string().required("Full name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  email: yup.string().email("Invalid email").required("Email is required").matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Email must be a valid format"),
   address: yup.string().required("Address is required"),
+  phone: yup.string().required("Phone number is required").min(10, "Phone number must be at least 10 characters"),
   city: yup.string().required("City is required"),
-  zip: yup.string().required("ZIP Code is required"),
-  cardNumber: yup.string().required("Card Number is required"),
-  expiry: yup.string().required("Expiry Date is required"),
-  cvc: yup.string().required("CVC is required"),
+  zip: yup.number().required("ZIP Code is required"),
+  cardNumber: yup.number().required("Card Number is required").max(16, "Card Number must be 16 digits").min(16, "Card Number must be 16 digits"),
+  expiry: yup.string().required("Expiry Date is required").matches(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/, "Expiry date must be in MM/YY format"),
+  cvc: yup.number().required("CVC is required").min(3, "CVC must be at least 3 digits").max(4, "CVC must be at most 4 digits"),
   nameOnCard: yup.string().required("Name on card is required"),
 }); 
 
@@ -74,6 +76,11 @@ export default function CheckoutPage() {
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" type="email" {...register("email")} />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+              </div>
+               <div  className="sm:col-span-2">
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input id="phone" type="tel" {...register("phone")} />
+                {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
               </div>
               <div className="sm:col-span-2">
                 <Label htmlFor="address">Address</Label>

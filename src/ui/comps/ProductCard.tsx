@@ -13,35 +13,57 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { useFavouriteStore } from "@/store/useFavouritesStore";
 import { useCartStore } from "@/store/useCartStore";
+import { useAddCartItem } from "@/apis/cart/addCart";
 
-function VCard({ item }: { item: PhoneDetails }) {
+
+function VCard({ item , quantity }: { item: PhoneDetails , quantity: number }) {
   const [isPressed, setIsPressed] = useState(false);
+  const addtoCart = useAddCartItem();
 
   const handlePressStart = () => setIsPressed(true);
   const handlePressEnd = () => setIsPressed(false);
 
+  const items={
+    items:[{
+    product: item._id,
+    quantity: 1,
+  }]}
+  
+  function handleCart(item: PhoneDetails) {
+    
+    useCartStore.getState().addItem({
+      _id: item._id,
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      brand: item.brand,
+      selected: true,
+    });
+    addtoCart.mutate(items);
+  }
+
   return (
-   
-      <Card
-        className={clsx(
-          " sm:w-[200px] md:w-[250px] bg-white rounded-2xl shadow-lg transition-transform duration-300 border-2",
-          {
-            "hover:shadow-xl hover:-translate-y-2 hover:border-primary": !isPressed,
-            "border-transparent": !isPressed,
-            "border-primary shadow-xl scale-[1.02]": isPressed,
-          }
-        )}
-      > <Link
-      to={`/details/${item._id}`}
-      className="no-underline"
-      role="button"
-      tabIndex={0}
-      onTouchStart={handlePressStart}
-      onTouchEnd={handlePressEnd}
-      onMouseDown={handlePressStart}
-      onMouseUp={handlePressEnd}
-      onMouseLeave={handlePressEnd}
+    <Card
+      className={clsx(
+        " sm:w-[200px] md:w-[250px] bg-white rounded-2xl shadow-lg transition-transform duration-300 border-2",
+        {
+          "hover:shadow-xl hover:-translate-y-2 hover:border-primary": !isPressed,
+          "border-transparent": !isPressed,
+          "border-primary shadow-xl scale-[1.02]": isPressed,
+        }
+      )}
     >
+      <Link
+        to={`/details/${item._id}`}
+        className="no-underline"
+        role="button"
+        tabIndex={0}
+        onTouchStart={handlePressStart}
+        onTouchEnd={handlePressEnd}
+        onMouseDown={handlePressStart}
+        onMouseUp={handlePressEnd}
+        onMouseLeave={handlePressEnd}
+      >
         <CardHeader className="flex justify-center">
           <div className="w-full aspect-[4/3]">
             <img
@@ -73,7 +95,7 @@ function VCard({ item }: { item: PhoneDetails }) {
                   "bg-white text-primary border-primary": isPressed,
                 }
               )}
-              onClick={() => useCartStore.getState().addItem(item)}
+              onClick={() => handleCart(item)}
             >
               <FaCartPlus className="text-base sm:text-lg" />
             </Button>
@@ -97,5 +119,7 @@ function VCard({ item }: { item: PhoneDetails }) {
    
   );
 }
+  
 
 export default VCard;
+

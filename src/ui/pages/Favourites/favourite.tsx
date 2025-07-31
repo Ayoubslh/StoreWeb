@@ -3,21 +3,25 @@ import { FaHeartCrack } from "react-icons/fa6";
 import ProductCard from "@/ui/comps/ProductCard";
 import { useFavouriteStore } from "@/store/useFavouritesStore";
 import { useEffect, useState } from "react";
-import {redirect} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { useUserStore } from "@/store/useUser";
 
 export default function FavouritesPage() {
+  const navigate = useNavigate();
 
   const isLoggedIn = useUserStore((state) => state.isAuthenticated);
-  if (!isLoggedIn) {
-    redirect('/login');
-  }
+  console.log("Is user logged in:", isLoggedIn);
+
   const favouritePhones = useFavouriteStore((state) => state.items);
   const [favourite, setFavourite] = useState(() =>
     favouritePhones.map((item) => ({ ...item, selected: true }))
   );
 
   useEffect(() => {
+      if (!isLoggedIn) {
+    navigate('/login');
+    return
+  }
     setFavourite((prev) => {
       return favouritePhones.map((item) => {
         const prevItem = prev.find((p) => p._id === item._id);

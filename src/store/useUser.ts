@@ -23,10 +23,14 @@ export const useUserStore = create<UserState>()(
         set({
           user: null,
           isAuthenticated: false,
+          
         }),
+        
     }),
+
     {
       name: 'user-storage', 
     }
   )
+  
 );

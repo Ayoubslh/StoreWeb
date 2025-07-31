@@ -20,14 +20,15 @@ interface Props {
 
 export default function CartItemCard({
   item,
-  toggleSelection,
+  quantity,
+  selected,  toggleSelection,
   handleQuantityChange,
 }: Props) {
   return (
     
     <div
       className={`flex items-center gap-4 p-4 rounded-xl border-2 w-full h-36 transition-all duration-300
-        ${item.selected
+        ${selected
           ? "border-primary bg-primary/10 shadow-inner"
           : "border-gray-300 bg-gray-100"}
       `}
@@ -36,10 +37,10 @@ export default function CartItemCard({
       <button
         onClick={() => toggleSelection(item._id)}
         className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300
-          ${item.selected ? "bg-primary" : "bg-gray-400"}
+          ${selected ? "bg-primary" : "bg-gray-400"}
         `}
       >
-        {item.selected ? (
+        {selected ? (
           <IoCheckmark className="text-white text-sm" />
         ) : (
           <IoEllipseOutline className="text-white text-sm" />
@@ -73,7 +74,7 @@ export default function CartItemCard({
             >
               <IoRemove size={16} />
             </button>
-            <span className="font-bold">{item.quantity}</span>
+            <span className="font-bold">{quantity}</span>
             <button
               onClick={() => handleQuantityChange(item._id, 1)}
               className="bg-gray-200 w-7 h-7 flex items-center justify-center rounded-full"

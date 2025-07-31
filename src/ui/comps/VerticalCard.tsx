@@ -7,6 +7,9 @@ import {
 } from "@/components/ui/card";
 import { useState } from "react";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
+
+const Categories = ["phones", "laptops", "tablets", "accessories"] as const;
 
 function VCard({
   name,
@@ -18,6 +21,7 @@ function VCard({
   description: string;
 }) {
   const [isPressed, setIsPressed] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -34,6 +38,12 @@ function VCard({
       onTouchStart={() => setIsPressed(true)}
       onTouchEnd={() => setIsPressed(false)}
       onMouseLeave={() => setIsPressed(false)} // fallback in case mouse used
+      onClick={() => {
+       
+        if (Categories.includes(name.toLowerCase() as typeof Categories[number])) {
+          navigate(`/AllProds?category=${name.toLowerCase()}`);
+        }
+      }}
     >
       <CardContent className="flex flex-col items-center justify-center p-6">
         {icon && (
