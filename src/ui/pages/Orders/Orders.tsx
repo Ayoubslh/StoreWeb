@@ -5,39 +5,26 @@ import { useOrderStore } from "@/store/useOrderStore";
 
 
 export default function OrderPage() {
-  const orders = useOrderStore((state) => state.orders);
-  console.log("Orders:", orders); 
-    const[order, setOrders] = useState(()=>
-    orders.map((order) => ({
-      ...order,
-      items: order.items.map((item) => ({
-        ...item,
-        selected: true,
-      })),
+  const rawOrders = useOrderStore((state) => state.orders);
+const [order, setOrders] = useState(() =>
+  rawOrders.map((order) => ({
+    ...order,
+    items: order.items.map((item) => ({
+      ...item,
+      selected: true,
     })),
-  );
-useEffect(() => {
-    setOrders((prev) => {
-      const updated = orders.map((order) => {
-        const prevOrder = prev.find((p) => p._id === order._id);
-        return {
-          ...order,
-          items: (prevOrder ? prevOrder.items : order.items).map((item) => ({
-            ...item,
-            selected: item.selected ?? true,
-          })),
-        };
-      });
-      return updated;
-    });
-  }, []);
+  }))
+);
+console.log("Raw orders:", order);
+
+  console.log("Order items:", order.map(o => o.items));
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-6 text-black">
     
 
-      {orders.map((order) => {
+      {order.map((order) => {
         const total = order.items.reduce(
-          (sum, item) => sum + item.price * item.quantity,
+          (sum, item) => sum + item.product.price * item.quantity,
           0
         );
 
@@ -50,7 +37,7 @@ useEffect(() => {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold text-lg">{order._id}</h2>
-                <p className="text-sm text-gray-500">{order.orderDate}</p>
+                <p className="text-sm text-gray-500">{order.createdAt}</p>
               </div>
               <span className="text-sm text-primary font-semibold">
                 {order.status}
@@ -60,22 +47,22 @@ useEffect(() => {
             {/* Items */}
             <div className="space-y-3">
               {order.items.map((item) => (
-                <div key={item._id} className="flex gap-4 items-center">
+                <div key={item.product._id} className="flex gap-4 items-center">
                   <img
-                    src={item.image}
-                    alt={item.name}
+                    src={item.product.image}
+                    alt={item.product.name}
                     className="w-16 h-16 object-cover rounded-md"
                   />
                   <div className="flex-1">
-                    <p className="font-semibold">{item.name}</p>
-                    <p className="text-sm text-gray-500">{item.brand}</p>
+                    <p className="font-semibold">{item.product.name}</p>
+                    <p className="text-sm text-gray-500">{item.product.brand}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm text-gray-500">
                       Qty: {item.quantity}
                     </p>
                     <p className="font-semibold">
-                      ${item.price * item.quantity}
+                      ${item.product.price * item.quantity}
                     </p>
                   </div>
                 </div>

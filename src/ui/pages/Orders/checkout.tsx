@@ -17,9 +17,9 @@ const schema = yup.object().shape({
   phone: yup.string().required("Phone number is required").min(10, "Phone number must be at least 10 characters"),
   city: yup.string().required("City is required"),
   zip: yup.number().required("ZIP Code is required"),
-  cardNumber: yup.number().required("Card Number is required").max(16, "Card Number must be 16 digits").min(16, "Card Number must be 16 digits"),
+  cardNumber: yup.number().required("Card Number is required").min(16, "Card Number must be 16 digits"),
   expiry: yup.string().required("Expiry Date is required").matches(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/, "Expiry date must be in MM/YY format"),
-  cvc: yup.number().required("CVC is required").min(3, "CVC must be at least 3 digits").max(4, "CVC must be at most 4 digits"),
+  cvc: yup.number().required("CVC is required").min(3, "CVC must be  3 digits"),
   nameOnCard: yup.string().required("Name on card is required"),
 }); 
 
@@ -28,9 +28,10 @@ type FormData = yup.InferType<typeof schema>;
 export default function CheckoutPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  console.log("Checkout state:", state.cartItems);
   const cartItems = state?.cartItems ? JSON.parse(state.cartItems) : [];
   console.log("Cart items in checkout:", cartItems);
-  const subtotal = cartItems.reduce((t, item) => t + item.price * item.quantity, 0);
+  const subtotal = cartItems.map(item => item.product.price * item.quantity).reduce((t, item) => t + item, 0);
   const shipping = 20;
   const total = subtotal + shipping;
 
@@ -134,12 +135,12 @@ export default function CheckoutPage() {
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
             <ul className="divide-y divide-gray-200">
               {cartItems.map((item) => (
-                <li key={item.id} className="flex justify-between py-2">
+                <li key={item.product._id} className="flex justify-between py-2">
                   <div>
-                    <p className="font-medium">{item.name}</p>
+                    <p className="font-medium">{item.product.name}</p>
                     <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
                   </div>
-                  <div className="text-right font-semibold">${item.price * item.quantity}</div>
+                  <div className="text-right font-semibold">${item.product.price * item.quantity}</div>
                 </li>
               ))}
             </ul>
