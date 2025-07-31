@@ -32,7 +32,7 @@ function Home() {
       <section className="text-center px-4">
         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-primary">Featured Products</h2>
         <p className="text-lg text-gray-600 mb-8">Discover our most popular products</p>
-        <Products />
+        <Products filter={{ minRating: 4 }} />
         <Button size="lg" className="mt-6 bg-primary text-white px-6 py-3 rounded-lg hover:bg-white hover:text-primary transition">
           See more <FaArrowRight className="inline ml-2" />
         </Button>

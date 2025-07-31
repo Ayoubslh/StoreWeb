@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { getUserToken } from "@/helper/getToken";
-
+import { toast } from "sonner";
 import { useUserStore } from "@/store/useUser";
 export type CartItem = {
   product: string;
@@ -40,11 +40,19 @@ export const useAddCartItem = () => {
   return useMutation<CartItems, Error, CartItems>({
     mutationFn: addCartItem,
     onSuccess: (data) => {
-      console.log("Item added to cart:", data);
+   
+      toast('Item added to cart successfully', {
+        description: "Your item has been added to the cart.",
+        dismissible: true,
+      });
     },
     onError: (error) => {
+      toast('Error adding item to cart', {
+        description: error.message,
+        dismissible: true,
+      });
       // Handle error, e.g., show notification
-      console.error("Error adding item to cart:", error);
+      
     },
   });
 };

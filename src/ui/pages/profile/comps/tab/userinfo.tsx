@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useUserStore } from "@/store/useUser";
 import {z} from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 
 
@@ -18,12 +19,14 @@ export default function UserInfo() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "Ayoub Salhi",
-      email: "ayoub@example.com",
+      name: "Some User",
+      email: "someuser@example.com",
       phonenum: "1234567890",
     },  
     });
     const onSubmit = (data: FormData) => {
+          toast.success("You clicked , i didnt implement it maybe later ");
+
       console.log("Updated user info:", data);
       
     }

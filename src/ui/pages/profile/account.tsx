@@ -13,18 +13,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import OrderPage from "../Orders/Orders";
 import { useUserStore } from "@/store/useUser";
 import UserInfo from "./comps/tab/userinfo";
 import UpdatePassword from "./comps/tab/updatePassword";
+import { toast } from "sonner";
 
 export default function AccountPage() {
 
+  const isLoggedIn = useUserStore((state) => state.isAuthenticated);
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
 
-  const onSubmit = (data: any) => {
-    console.log("Updated account info:", data);
-  };
+
 
   const handleLogout = () => {
     useUserStore.getState().logout();

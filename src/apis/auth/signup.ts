@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import type { UserType } from '../../Types/UserType';
 import { useUserStore } from '@/store/useUser';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "sonner";
 
 
 type SignupInput ={
@@ -36,12 +37,18 @@ export const useSignup = () => {
     onSuccess: (data) => {
       const setUser = useUserStore.getState().setUser;
       setUser(data); // Store user data in Zustand store
-      
+      toast('Signup Successful', {
+        description: "Welcome! Your account has been created.",
+      });
+
       navigate('/');
 
       console.log('Signup successful:', data);
     },
     onError: (error) => {
+      toast('Signup Failed', {
+        description: error.message,
+        dismissible: true,});
       console.error('Signup error:', error);
     }
 

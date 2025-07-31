@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import type { UserType } from '../../Types/UserType';
 import { useUserStore } from '@/store/useUser';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "sonner";
 
 
 
@@ -36,12 +37,20 @@ export const useLogin = () => {
     mutationFn:Login,
     onSuccess: (data) => {
       const setUser = useUserStore.getState().setUser;
-      setUser(data); // Store user data in Zustand store
-      navigate('/'); 
-    
+      setUser(data); 
+      toast('Login Successful', {
+        description: "Welcome back! You are now logged in.",
+      dismissible: true,
+      });
+      navigate('/');
+
       console.log('Login successful:', data);
     },
     onError: (error) => {
+      toast('Login Failed', {
+        description: error.message,
+        dismissible: true,
+      });
       console.error('Login error:', error);
     }
 

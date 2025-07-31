@@ -6,7 +6,6 @@ import Footer from './ui/comps/Footer';
 import{Routes, Route} from 'react-router-dom';
 import PhoneDetailsPage from './ui/pages/item_details/details';
 import CartPage from './ui/pages/Cart/cart';
-import OrderPage from './ui/pages/Orders/Orders';
 import FavouritesPage from './ui/pages/Favourites/favourite';
 import Home from './ui/pages/Home/Home';
 import AllProductsPage from './ui/pages/All_Products/AllProds';
@@ -16,7 +15,7 @@ import LoginScreen from './ui/pages/auth/login';
 import AboutPage from './ui/pages/statics/about';
 import ContactPage from './ui/pages/statics/contact';
 import AccountPage from './ui/pages/profile/account';
-
+import { Toaster } from "@/components/ui/sonner"
 
 const queryClient = new QueryClient();
 
@@ -24,6 +23,8 @@ const queryClient = new QueryClient();
 function App() {
 
   return (
+    <>
+    <Toaster />
     <QueryClientProvider client={queryClient}>
     <div className='bg-background text-whitemin-h-screen min-w-screen'>
       <p className='text-lg font-bold text-white text-center  bg-primary p-4'>
@@ -47,6 +48,7 @@ function App() {
       <Footer />
     </div>
     </QueryClientProvider>
+    </>
   )
 }
 

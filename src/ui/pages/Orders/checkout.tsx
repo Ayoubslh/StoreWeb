@@ -6,7 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useOrderStore } from "@/store/useOrderStore";
 import { useLocation,useNavigate } from "react-router-dom";
-import { Phone } from "lucide-react";
+import { useAddOrder } from "@/apis/Orders/addOrder";
+
 
 
 
@@ -34,6 +35,7 @@ export default function CheckoutPage() {
   const subtotal = cartItems.map(item => item.product.price * item.quantity).reduce((t, item) => t + item, 0);
   const shipping = 20;
   const total = subtotal + shipping;
+  const addOrderMutation = useAddOrder();
 
   const {
     register,
@@ -45,12 +47,26 @@ export default function CheckoutPage() {
 
   const onSubmit = (data: FormData) => {
     const order = {
-      ...data,
-      items: cartItems,
-      totalPrice: total,
-      status: "pending" as "pending",
-      orderDate: new Date().toISOString(),
-    };
+  items: cartItems.map((item: any) => ({
+    product: item._id,
+    quantity: item.quantity,
+  })),
+ 
+  shippingAddress: {
+    street: data.address,
+    city: data.city,
+    zip: String(data.zip),
+     country: "USA", // or use a country field if available
+  },
+  totalPrice: total,
+  deliveryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // or set expected delivery
+  status: "pending",
+
+};
+    console.log("Submitting order:", order);
+
+    addOrderMutation.mutate(order)
+
     useOrderStore.getState().addOrder(order);
     
     alert("Order placed successfully!");

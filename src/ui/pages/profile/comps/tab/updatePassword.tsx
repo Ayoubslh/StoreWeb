@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useUserStore } from "@/store/useUser";
 import {z} from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 const schema = z.object({
   currentPassword: z.string().min(6, "Current password is required"),
@@ -21,6 +22,8 @@ export default function UpdatePassword() {
   });
 
   const onSubmit = (data: FormData) => {
+        toast.success("You clicked , i didnt implement it maybe later ");
+
     console.log("Updated password:", data);
   };
 

@@ -15,6 +15,9 @@ import { useFavouriteStore } from "@/store/useFavouritesStore";
 import { useCartStore } from "@/store/useCartStore";
 import { useAddCartItem } from "@/apis/cart/addCart";
 
+import { toast } from "sonner";
+
+
 
 function VCard({ item , quantity }: { item: PhoneDetails , quantity: number }) {
   const [isPressed, setIsPressed] = useState(false);
@@ -40,8 +43,18 @@ function VCard({ item , quantity }: { item: PhoneDetails , quantity: number }) {
       selected: true,
     });
     addtoCart.mutate(items);
+      toast('Item added to cart successfully', {
+        description: "Your item has been added to the cart.",
+        dismissible: true,
+      });
   }
-
+  function handleFavourite(item: PhoneDetails) {
+    useFavouriteStore.getState().toggleFavourite(item)
+    toast('Item Added to Favourites', {
+      description: `${item.name} has been added to your favourites.`,
+      dismissible: true,
+    });
+  }
   return (
     <Card
       className={clsx(
@@ -109,7 +122,7 @@ function VCard({ item , quantity }: { item: PhoneDetails , quantity: number }) {
                   "bg-white text-primary border-primary": isPressed,
                 }
               )}
-              onClick={() => useFavouriteStore.getState().toggleFavourite(item)}
+              onClick={() => handleFavourite(item)}
             >
               <FaHeartCirclePlus className="text-base sm:text-lg" />
             </Button>

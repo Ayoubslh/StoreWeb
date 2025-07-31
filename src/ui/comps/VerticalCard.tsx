@@ -9,7 +9,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 
-const Categories = ["phones", "laptops", "tablets", "accessories"] as const;
+const Categories = ["phone", "laptop", "tablet", "smartwatch"] as const;
 
 function VCard({
   name,

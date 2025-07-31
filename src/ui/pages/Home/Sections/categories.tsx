@@ -6,22 +6,22 @@ import VCard from "@/ui/comps/VerticalCard";
 const categories = [
   {
     id: '1',
-    name: 'Phones',
+    name: 'Phone',
     icon: <IoPhonePortraitOutline className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
   },
   {
     id: '2',
-    name: 'Tablets',
+    name: 'Tablet',
     icon: <FaTabletAlt className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
   },
   {
     id: '3',
-    name: 'Laptops',
+    name: 'Laptop',
     icon: <IoIosLaptop className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
   },
   {
     id: '4',
-    name: 'Smartwatches',
+    name: 'Smartwatche',
     icon: <BsSmartwatch className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
   },
 ];

@@ -43,17 +43,17 @@ export default function PhoneDetail() {
   if (!phone) {
     return <div>Loading...</div>;
   }
-  function handleClick(id: string) {
-    if (!phone) return;
-    navigate('/checkout', { state: { cartItems: JSON.stringify([{_id: id,
+  const product={product:{_id: id,
     name: phone.name,
     price: phone.price,
-    quantity: 1,
+   
     image: phone.image,
     brand: phone.brand,
     selected: true,
-
-  }] ) } });
+  }, quantity: 1,selected: true,_id: id};
+  function handleClick(id: string) {
+    if (!phone) return;
+    navigate('/checkout', { state: { cartItems:  JSON.stringify ( [product]) } });
   }
 
   return (

@@ -18,8 +18,8 @@ interface Props {
   setFilters: (filters: FilterState) => void;
 }
 
-const allBrands = ["Apple", "Samsung", "Google"];
-const allTypes = ["phone", "accessory"]; // ✅ New categories
+const allBrands = ["Apple", "Samsung", "Google","OnePlus", "Xiaomi", "Sony"]; 
+const allTypes = ["phone", "tablet","laptop","smartwatch"]; 
 
 export default function FiltersPanel({ filters, setFilters }: Props) {
   const [localFilters, setLocalFilters] = useState(filters);

@@ -13,7 +13,6 @@ export type order = {
     zip: string;
     country: string;
   };
-  totalAmount: number;
   totalPrice: number;
   deliveryDate: string;
   status: "pending" | "shipped" | "delivered" | "cancelled" | "deactivated";
@@ -29,4 +28,5 @@ export type OrderState = {
     orderId: string,
     status: "pending" | "shipped" | "delivered" | "cancelled" | "deactivated"
   ) => void;
+  setOrders?: (orders: order[]) => void; 
 };
