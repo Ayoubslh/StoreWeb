@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import{Link} from "react-router-dom";
 import { useSignup } from "../../../apis/auth/signup"; 
 import { useState } from "react";
+import { Loader } from "lucide-react";
 // Adjust the import path as necessary
  const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -111,11 +112,10 @@ const [showConfirm, setShowConfirm] = useState(false);
 </div>
 
 
-            <button
+          <button
               type="submit"
-              className="w-full bg-[#C67C4E] text-white py-2 rounded hover:bg-[#A65B3C]"
-            >
-              Register
+              className="w-full flex bg-[#C67C4E] text-white py-2 rounded justify-center"
+            >{signupMutation.isPending ?  <Loader className="animate-spin "  /> : "Register"}
             </button>
 
             <p className="text-center text-sm mt-4">

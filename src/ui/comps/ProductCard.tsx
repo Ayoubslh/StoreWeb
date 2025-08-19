@@ -13,13 +13,14 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { useFavouriteStore } from "@/store/useFavouritesStore";
 import { useCartStore } from "@/store/useCartStore";
-import { useAddCartItem } from "@/apis/cart/addCart";
+import { useAddCartItem, type CartItems } from "@/apis/cart/addCart";
 
 import { toast } from "sonner";
 
 
 
-function VCard({ item , quantity }: { item: PhoneDetails , quantity: number }) {
+
+function VCard({ item }: { item: PhoneDetails }) {
   const [isPressed, setIsPressed] = useState(false);
   const addtoCart = useAddCartItem();
 
@@ -41,7 +42,7 @@ function VCard({ item , quantity }: { item: PhoneDetails , quantity: number }) {
       image: item.image,
       brand: item.brand,
     });
-    addtoCart.mutate(items);
+    addtoCart.mutate(items as unknown  as CartItems);
       toast('Item added to cart successfully', {
         description: "Your item has been added to the cart.",
         dismissible: true,

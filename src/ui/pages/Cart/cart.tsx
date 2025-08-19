@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CartItemCard from "./../../comps/CartCard";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useCartStore } from "@/store/useCartStore";
 import { useUserStore } from "@/store/useUser";
 import { cartQuery } from "@/apis/cart/GetCart";
@@ -23,7 +23,7 @@ export default function CartPage() {
     }
 
     if (items.length > 0) {
-      const itemsWithSelection = items.map((item) => ({
+      const itemsWithSelection = items.map((item : any) => ({
         ...item,
         selected: true,
         quantity: item.quantity || 1, // ensure quantity exists

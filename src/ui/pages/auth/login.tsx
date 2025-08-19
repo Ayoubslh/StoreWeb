@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { useLogin } from "../../../apis/auth/login"; // Adjust the import path as necessary
+import { Loader } from "lucide-react";
 
 
 const loginSchema = z.object({
@@ -57,9 +58,8 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-[#C67C4E] text-white py-2 rounded"
-            >
-              Login
+              className="w-full flex bg-[#C67C4E] text-white py-2 rounded justify-center"
+            >{loginMutation.isPending ?  <Loader className="animate-spin "  /> : "Login"}
             </button>
 
             <p className="text-center text-sm mt-4">

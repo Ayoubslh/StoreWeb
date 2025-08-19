@@ -21,7 +21,7 @@ const categories = [
   },
   {
     id: '4',
-    name: 'Smartwatche',
+    name: 'Smartwatch',
     icon: <BsSmartwatch className="text-black group-hover:text-primary  transition-all duration-500 -translate-y-[2px]" size={60} />,
   },
 ];
