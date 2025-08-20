@@ -2,36 +2,36 @@ import { FaHeart } from "react-icons/fa";
 import { FaHeartCrack } from "react-icons/fa6";
 import ProductCard from "@/ui/comps/ProductCard";
 import { useFavouriteStore } from "@/store/useFavouritesStore";
-import { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useUserStore } from "@/store/useUser";
+import { useGetFavourites } from "@/apis/favourites/getfavourite";
 
 export default function FavouritesPage() {
   const navigate = useNavigate();
 
   const isLoggedIn = useUserStore((state) => state.isAuthenticated);
-  console.log("Is user logged in:", isLoggedIn);
+  const { data, isLoading, isError } = useGetFavourites();
 
+  // favourites from store
   const favouritePhones = useFavouriteStore((state) => state.items);
-  const [favourite, setFavourite] = useState(() =>
-    favouritePhones.map((item) => ({ ...item, selected: true }))
-  );
+  const setFavourites = useFavouriteStore((state) => state.setItems);
 
+  // redirect + sync favourites
   useEffect(() => {
-      if (!isLoggedIn) {
-    navigate('/login');
-    return
-  }
-    setFavourite((prev) => {
-      return favouritePhones.map((item) => {
-        const prevItem = prev.find((p) => p._id === item._id);
-        return {
-          ...item,
-          selected: prevItem ? prevItem.selected : true,
-        };
-      });
-    });
-  }, [favouritePhones]);
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
+    }
+    if (data && typeof setFavourites === "function") {
+      setFavourites(data);
+    }
+  }, [data, setFavourites, isLoggedIn, navigate]);
+
+
+
+  if (isLoading) return <p>Loading favourites...</p>;
+  if (isError) return <p>Failed to load favourites.</p>;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -54,7 +54,7 @@ export default function FavouritesPage() {
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {favourite.map((phone) => (
+          {favouritePhones.map((phone) => (
             <ProductCard key={phone._id} item={phone} />
           ))}
         </div>

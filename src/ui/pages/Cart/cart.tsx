@@ -3,14 +3,14 @@ import CartItemCard from "./../../comps/CartCard";
 import {  useNavigate } from "react-router-dom";
 import { useCartStore } from "@/store/useCartStore";
 import { useUserStore } from "@/store/useUser";
-import { cartQuery } from "@/apis/cart/GetCart";
+import { useCartQuery } from "@/apis/cart/GetCart";
 
 export default function CartPage() {
   const isLoggedIn = useUserStore((state) => state.isAuthenticated);
   const setCart = useCartStore((state) => state.setCart);
 
   const navigate = useNavigate();
-  const { data, isLoading, isError } = cartQuery();
+  const { data, isLoading, isError } = useCartQuery();
   const items = data?.data?.cart.items || [];
 
   const [cartItems, setCartItems] = useState<any[]>([]);
@@ -32,7 +32,7 @@ export default function CartPage() {
       setCart(itemsWithSelection); // update global cart
       setCartItems(itemsWithSelection); // set local cart with `selected`
     }
-  }, [data, isLoggedIn, navigate, setCart]);
+  }, [data, isLoggedIn, navigate, setCart, items]);
 
   const toggleSelection = (id: string) => {
     setCartItems((prev) =>

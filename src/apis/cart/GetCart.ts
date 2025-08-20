@@ -23,7 +23,7 @@ export const getCart = async (): Promise<CartType> => {
   return data ;
 };
 
-export const cartQuery = () => {
+export const useCartQuery = () => {
   return useQuery<CartType>({
     queryKey: ["cart"],
     queryFn: () => getCart(),

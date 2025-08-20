@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { getUserToken } from "@/helper/getToken";
 import { toast } from "sonner";
-import { useUserStore } from "@/store/useUser";
+
 export type CartItem = {
   product: string;
   quantity: number;
@@ -15,7 +15,6 @@ const addCartItem = async (items: CartItems): Promise<CartItems> => {
     const token= getUserToken();
     console.log(items)
 
-  console.log("user authenticated:", useUserStore.getState().isAuthenticated);
   if (!token) {
     throw new Error("User not authenticated");
   }

@@ -14,6 +14,7 @@ import clsx from "clsx";
 import { useFavouriteStore } from "@/store/useFavouritesStore";
 import { useCartStore } from "@/store/useCartStore";
 import { useAddCartItem, type CartItems } from "@/apis/cart/addCart";
+import { useAddFavourite } from "@/apis/favourites/addfavourite";
 
 import { toast } from "sonner";
 
@@ -23,6 +24,7 @@ import { toast } from "sonner";
 function VCard({ item }: { item: PhoneDetails }) {
   const [isPressed, setIsPressed] = useState(false);
   const addtoCart = useAddCartItem();
+  const addfavourite = useAddFavourite();
 
   const handlePressStart = () => setIsPressed(true);
   const handlePressEnd = () => setIsPressed(false);
@@ -49,7 +51,8 @@ function VCard({ item }: { item: PhoneDetails }) {
       });
   }
   function handleFavourite(item: PhoneDetails) {
-    useFavouriteStore.getState().toggleFavourite(item)
+    useFavouriteStore.getState().toggleFavourite(item);
+    addfavourite.mutate(item._id);
     toast('Item Added to Favourites', {
       description: `${item.name} has been added to your favourites.`,
       dismissible: true,

@@ -1,9 +1,11 @@
 import {create} from 'zustand';
 import type { FavouriteState } from './../Types/FavouriteTypes';
+import type { PhoneDetails } from '@/Types/phone';
 
 
 export const useFavouriteStore = create<FavouriteState>((set,get)=>({
     items:[],
+    
     toggleFavourite: (item)=>{
         const existingItem = get().items.find(i => i._id === item._id);
         if(existingItem){
@@ -13,6 +15,7 @@ export const useFavouriteStore = create<FavouriteState>((set,get)=>({
                 items:[...state.items,item]}))
         }
     },
-    isFavourite:(id)=>!!get().items.find((i)=>i._id===id)
+    isFavourite:(id)=>!!get().items.find((i)=>i._id===id),
+    setItems: (items: PhoneDetails[]) => set({ items }),
       
 }))
